@@ -9,7 +9,7 @@ public interface List {
 
     boolean search(int key);
 
-    Integer get(int index);
+    int get(int index);
 
     int getIndex(int value);
 

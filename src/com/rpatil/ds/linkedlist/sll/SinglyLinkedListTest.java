@@ -3,98 +3,6 @@ package com.rpatil.ds.linkedlist.sll;
 import org.testng.Assert;
 
 public class SinglyLinkedListTest {
-    public static void main(String[] args) {
-        SinglyLinkedList list1 = new SinglyLinkedList();
-        SinglyLinkedList list2 = new SinglyLinkedList(10);
-
-        System.out.println("list1: " + list1);
-        System.out.println("list2: " + list2);
-        System.out.println();
-
-        System.out.println("Add 10 to list1 using addFirst");
-        list1.addFirst(10);
-        System.out.println("list1: " + list1);
-        System.out.println("Add 1 to list1 using addFirst");
-        list1.addFirst(1);
-        System.out.println("list1: " + list1);
-        System.out.println("Add 0 to list1 using addFirst");
-        list1.addFirst(0);
-        System.out.println("list1: " + list1);
-        System.out.println();
-
-        System.out.println("Add 1 to list2 using addFirst");
-        list2.addFirst(1);
-        System.out.println("list2: " + list2);
-        System.out.println("Add 0 to list2 using addFirst");
-        list2.addFirst(0);
-        System.out.println("list2: " + list2);
-        System.out.println();
-
-        System.out.println("Add 100 to list1 using addLast");
-        list1.addLast(100);
-        System.out.println("list1: " + list1);
-        System.out.println("Add 1000 to list1 using addLast");
-        list1.addLast(1000);
-        System.out.println("list1: " + list1);
-        System.out.println();
-
-        System.out.println("Add 100 to list2 using addLast");
-        list2.addLast(100);
-        System.out.println("list2: " + list2);
-        System.out.println("Add 1000 to list2 using addLast");
-        list2.addLast(1000);
-        System.out.println("list2: " + list2);
-        System.out.println();
-
-        System.out.println("Add 0 to list1 at index 0");
-        list1.addAtIndex(0, 0);
-        System.out.println("list1: " + list1);
-        System.out.println("Add 2 to list1 at index 2");
-        list1.addAtIndex(2, 2);
-        System.out.println("list1: " + list1);
-        System.out.println();
-
-        System.out.println("Add 1 to list2 at index 1");
-        list2.addAtIndex(1, 1);
-        System.out.println("list2: " + list2);
-        System.out.println("Add 4 to list2 at index 4");
-        list2.addAtIndex(4, 4);
-        System.out.println("list2: " + list2);
-        System.out.println();
-
-        System.out.println("Remove 0 from list1 using delete");
-        list1.delete(0);
-        System.out.println("list1: " + list1);
-        System.out.println("Remove 1000 from list1 using delete");
-        list1.delete(1000);
-        System.out.println("list1: " + list1);
-        System.out.println();
-
-        System.out.println("Remove 1 from list2 using delete");
-        list2.delete(1);
-        System.out.println("list2: " + list2);
-        System.out.println("Remove 100 from list2 using delete");
-        list2.delete(100);
-        System.out.println("list2: " + list2);
-        System.out.println();
-
-        System.out.print("Is 1 present in list1: ");
-        System.out.println(list1.search(1));
-        System.out.print("Is 100 present in list1: ");
-        System.out.println(list1.search(100));
-        System.out.print("Is 1000 present in list1: ");
-        System.out.println(list1.search(1000));
-        System.out.println();
-
-        System.out.print("Is 1 present in list2: ");
-        System.out.println(list2.search(1));
-        System.out.print("Is 100 present in list2: ");
-        System.out.println(list2.search(100));
-        System.out.print("Is 1000 present in list2: ");
-        System.out.println(list2.search(1000));
-        System.out.println();
-    }
-
     SinglyLinkedList sll1;
     SinglyLinkedList sll2;
     @org.testng.annotations.BeforeMethod
@@ -153,10 +61,45 @@ public class SinglyLinkedListTest {
 
     @org.testng.annotations.Test
     public void testSearch() {
+        sll1.addFirst(15);
+        sll1.addFirst(10);
+        sll1.addFirst(5);
+        sll1.addFirst(0);
+        Assert.assertTrue(sll1.search(0));
+        Assert.assertTrue(sll1.search(5));
+        Assert.assertTrue(sll1.search(10));
+        Assert.assertTrue(sll1.search(15));
+        Assert.assertFalse(sll1.search(20));
+
+        sll2.addFirst(10);
+        sll2.addFirst(5);
+        sll2.addFirst(0);
+        Assert.assertTrue(sll2.search(10));
+        Assert.assertTrue(sll2.search(15));
+        Assert.assertFalse(sll2.search(20));
+        Assert.assertFalse(sll2.search(25));
     }
 
     @org.testng.annotations.Test
     public void testGet() {
+        sll1.addFirst(15);
+        sll1.addFirst(10);
+        sll1.addFirst(5);
+        sll1.addFirst(0);
+        Assert.assertEquals(sll1.get(0), 0);
+        Assert.assertEquals(sll1.get(1), 5);
+        Assert.assertEquals(sll1.get(2), 10);
+        Assert.assertEquals(sll1.get(3), 15);
+        Assert.assertEquals(sll1.get(4), -1);
+
+        sll2.addFirst(10);
+        sll2.addFirst(5);
+        sll2.addFirst(0);
+        Assert.assertEquals(sll1.get(1), 5);
+        Assert.assertEquals(sll1.get(2), 10);
+        Assert.assertEquals(sll1.get(3), 15);
+        Assert.assertEquals(sll1.get(4), -1);
+        Assert.assertEquals(sll1.get(5), -1);
     }
 
     @org.testng.annotations.Test

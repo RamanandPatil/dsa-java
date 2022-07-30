@@ -79,9 +79,9 @@ public class SinglyLinkedList implements List {
     }
 
     @Override
-    public Integer get(int index) {
+    public int get(int index) {
         if (index < 0 || head == null) {
-            return null;
+            return -1;
         }
         Node temp = head;
         for (int i = 0; i < index; i++) {
