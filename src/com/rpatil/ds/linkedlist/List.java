@@ -11,7 +11,7 @@ public interface List {
 
     int get(int index);
 
-    int getIndex(int value);
+    int indexOf(int value);
 
     void delete(int value);
 

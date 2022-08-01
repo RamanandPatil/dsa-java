@@ -86,10 +86,8 @@ public class SinglyLinkedList implements List {
         Node temp = head;
         for (int i = 0; i < index; i++) {
             if (temp.next == null) {
-                System.err.println(
-                        "Index is larger than LinkedList size. Returning last" +
-                        " item");
-                return temp.data;
+                System.err.println("Index is larger than LinkedList size. Returning last item");
+                break;
             }
             temp = temp.next;
         }
@@ -97,7 +95,7 @@ public class SinglyLinkedList implements List {
     }
 
     @Override
-    public int getIndex(int value) {
+    public int indexOf(int value) {
         int index = 0;
         Node temp = head;
         while (temp != null) {

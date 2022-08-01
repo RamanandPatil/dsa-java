@@ -90,7 +90,7 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll1.get(1), 5);
         Assert.assertEquals(sll1.get(2), 10);
         Assert.assertEquals(sll1.get(3), 15);
-        Assert.assertEquals(sll1.get(4), -1);
+        Assert.assertEquals(sll1.get(4), 15);
 
         sll2.addFirst(10);
         sll2.addFirst(5);
@@ -98,16 +98,72 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll1.get(1), 5);
         Assert.assertEquals(sll1.get(2), 10);
         Assert.assertEquals(sll1.get(3), 15);
-        Assert.assertEquals(sll1.get(4), -1);
-        Assert.assertEquals(sll1.get(5), -1);
+        Assert.assertEquals(sll1.get(4), 15);
+        Assert.assertEquals(sll1.get(5), 15);
     }
 
     @org.testng.annotations.Test
-    public void testGetIndex() {
+    public void testIndexOf() {
+        sll1.addFirst(15);
+        sll1.addFirst(10);
+        sll1.addFirst(5);
+        sll1.addFirst(0);
+        Assert.assertEquals(sll1.indexOf(0), 0);
+        Assert.assertEquals(sll1.indexOf(5), 1);
+        Assert.assertEquals(sll1.indexOf(10), 2);
+        Assert.assertEquals(sll1.indexOf(15), 3);
+        Assert.assertEquals(sll1.indexOf(20), -1);
+
+        sll2.addFirst(10);
+        sll2.addFirst(5);
+        sll2.addFirst(0);
+        Assert.assertEquals(sll2.indexOf(0), 0);
+        Assert.assertEquals(sll2.indexOf(5), 1);
+        Assert.assertEquals(sll2.indexOf(10), 2);
+        Assert.assertEquals(sll2.indexOf(15), 3);
+        Assert.assertEquals(sll2.indexOf(20), -1);
+        Assert.assertEquals(sll2.indexOf(25), -1);
     }
 
     @org.testng.annotations.Test
     public void testDelete() {
+        sll1.addFirst(15);
+        sll1.addFirst(10);
+        sll1.addFirst(5);
+        sll1.addFirst(0);
+
+        Assert.assertEquals(sll1.indexOf(0), 0);
+        sll1.delete(0);
+        Assert.assertEquals(sll1.indexOf(0), -1);
+
+        Assert.assertEquals(sll1.indexOf(10), 1);
+        sll1.delete(10);
+        Assert.assertEquals(sll1.indexOf(10), -1);
+
+        Assert.assertEquals(sll1.indexOf(20), -1);
+        sll1.delete(20);
+        Assert.assertEquals(sll1.indexOf(20), -1);
+
+
+        sll2.addFirst(10);
+        sll2.addFirst(5);
+        sll2.addFirst(0);
+
+        Assert.assertEquals(sll2.indexOf(5), 1);
+        sll2.delete(5);
+        Assert.assertEquals(sll2.indexOf(5), -1);
+
+        Assert.assertEquals(sll2.indexOf(15), 2);
+        sll2.delete(15);
+        Assert.assertEquals(sll2.indexOf(15), -1);
+
+        Assert.assertEquals(sll2.indexOf(10), 1);
+        sll2.delete(10);
+        Assert.assertEquals(sll2.indexOf(10), -1);
+
+        Assert.assertEquals(sll2.indexOf(20), -1);
+        sll2.delete(20);
+        Assert.assertEquals(sll2.indexOf(20), -1);
     }
 
     @org.testng.annotations.Test
@@ -116,12 +172,19 @@ public class SinglyLinkedListTest {
 
     @org.testng.annotations.Test
     public void testTestToString() {
-        SinglyLinkedList sll = new SinglyLinkedList(10);
-        sll.addFirst(5);
-        sll.addFirst(0);
-        sll.addLast(15);
-        sll.addLast(20);
+        sll1.addFirst(15);
+        sll1.addFirst(10);
+        sll1.addFirst(5);
+        sll1.addFirst(0);
+        sll1.addLast(20);
 
-        Assert.assertEquals(sll.toString(), "0->5->10->15->20");
+        sll2.addFirst(20);
+        sll2.addFirst(10);
+        sll2.addFirst(0);
+        sll2.addLast(30);
+
+
+        Assert.assertEquals(sll1.toString(), "0->5->10->15->20");
+        Assert.assertEquals(sll2.toString(), "0->10->20->15->30");
     }
 }
