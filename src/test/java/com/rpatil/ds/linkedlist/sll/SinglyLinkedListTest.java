@@ -1,23 +1,29 @@
 package com.rpatil.ds.linkedlist.sll;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class SinglyLinkedListTest {
+
     SinglyLinkedList sll1;
     SinglyLinkedList sll2;
-    @org.testng.annotations.BeforeMethod
+
+    @BeforeMethod
     public void setUp() {
         sll1 = new SinglyLinkedList();
         sll2 = new SinglyLinkedList(15);
     }
 
-    @org.testng.annotations.AfterMethod
+    @AfterMethod
     public void tearDown() {
         sll1 = null;
         sll2 = null;
     }
 
-    @org.testng.annotations.Test
+
+    @Test
     public void testAddFirst() {
         sll1.addFirst(15);
         sll1.addFirst(10);
@@ -31,7 +37,7 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll2.toString(), "0->5->10->15");
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testAddLast() {
         sll1.addLast(15);
         sll1.addLast(10);
@@ -45,7 +51,7 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll2.toString(), "15->10->5->0");
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testAddAtIndex() {
         sll1.addAtIndex(0, 15);
         sll1.addAtIndex(1, 5);
@@ -59,7 +65,7 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll2.toString(), "15->10->5->0");
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testSearch() {
         sll1.addFirst(15);
         sll1.addFirst(10);
@@ -80,7 +86,7 @@ public class SinglyLinkedListTest {
         Assert.assertFalse(sll2.search(25));
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testGet() {
         sll1.addFirst(15);
         sll1.addFirst(10);
@@ -102,7 +108,7 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll1.get(5), 15);
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testIndexOf() {
         sll1.addFirst(15);
         sll1.addFirst(10);
@@ -125,7 +131,7 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll2.indexOf(25), -1);
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testDelete() {
         sll1.addFirst(15);
         sll1.addFirst(10);
@@ -166,11 +172,48 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(sll2.indexOf(20), -1);
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testDeleteAtIndex() {
+        sll1.addFirst(15);
+        sll1.addFirst(10);
+        sll1.addFirst(5);
+        sll1.addFirst(0);
+
+        Assert.assertEquals(sll1.indexOf(0), 0);
+        sll1.deleteAtIndex(0);
+        Assert.assertEquals(sll1.indexOf(0), -1);
+
+        Assert.assertEquals(sll1.indexOf(15), 2);
+        sll1.deleteAtIndex(2);
+        Assert.assertEquals(sll1.indexOf(15), -1);
+
+        Assert.assertEquals(sll1.indexOf(10), 1);
+        sll1.deleteAtIndex(2);
+        Assert.assertEquals(sll1.indexOf(10), 1);
+
+
+        sll2.addFirst(10);
+        sll2.addFirst(5);
+        sll2.addFirst(0);
+
+        Assert.assertEquals(sll2.indexOf(5), 1);
+        sll2.deleteAtIndex(1);
+        Assert.assertEquals(sll2.indexOf(5), -1);
+
+        Assert.assertEquals(sll2.indexOf(15), 2);
+        sll2.deleteAtIndex(2);
+        Assert.assertEquals(sll2.indexOf(15), -1);
+
+        Assert.assertEquals(sll2.indexOf(10), 1);
+        sll2.deleteAtIndex(1);
+        Assert.assertEquals(sll2.indexOf(10), -1);
+
+        Assert.assertEquals(sll2.indexOf(0), 0);
+        sll2.deleteAtIndex(-1);
+        Assert.assertEquals(sll2.indexOf(0), 0);
     }
 
-    @org.testng.annotations.Test
+    @Test
     public void testTestToString() {
         sll1.addFirst(15);
         sll1.addFirst(10);

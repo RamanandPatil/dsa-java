@@ -86,7 +86,9 @@ public class SinglyLinkedList implements List {
         Node temp = head;
         for (int i = 0; i < index; i++) {
             if (temp.next == null) {
-                System.err.println("Index is larger than LinkedList size. Returning last item");
+                System.err.println(
+                        "Index is larger than LinkedList size. Returning last" +
+                        " item");
                 break;
             }
             temp = temp.next;
@@ -129,31 +131,37 @@ public class SinglyLinkedList implements List {
 
     @Override
     public boolean deleteAtIndex(int index) {
+        // If SinglyLinkedList is empty or invalid index is passed return false
         if (head == null || index < 0) {
             return false;
-        } else if (index == 0) {
+        } else if (index == 0) { // Deleting the head
+            // If head is the only node present, delete it. Otherwise, make
+            // next node as head
             if (head.next == null) {
                 head = null;
             } else {
-                delete(head.data);
+                head = head.next;
             }
             return true;
         }
-        Node temp = head;
-        while (temp.next != null && index >= 1) {
-            temp = temp.next;
-            index = index - 1;
+        Node cur = head.next;
+        Node prev = head;
+        int pointer = 1;
+        while (cur.next != null && pointer < index) {
+            cur = cur.next;
+            prev = prev.next;
+            pointer++;
         }
-        if (temp.next == null) {
-            System.err.println("Index is out of LinkedList bounds");
+        // Check if we have reached end before the index, meaning index is bigger than the size
+        if (pointer < index) {
+            System.err.println("List Index is out of bounds");
             return false;
+        }
+        // See if we are deleting the last node
+        if (cur.next == null) {
+            prev.next = null;
         } else {
-            // See if we are deleting the last node
-            if (temp.next.next == null) {
-                temp.next = null;
-            } else {
-                temp = temp.next.next;
-            }
+            prev.next = cur.next;
         }
         return true;
     }
@@ -179,6 +187,14 @@ public class SinglyLinkedList implements List {
         public Node(int value) {
             data = value;
             next = null;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                   "data=" + data +
+                   ", next=" + next +
+                   '}';
         }
     }
 }
