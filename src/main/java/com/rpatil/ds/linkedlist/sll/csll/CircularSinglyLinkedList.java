@@ -1,10 +1,10 @@
 package com.rpatil.ds.linkedlist.sll.csll;
 
-import org.w3c.dom.Node;
+import com.rpatil.ds.linkedlist.List;
 
-public class CircularSinglyLinkedList {
+public class CircularSinglyLinkedList implements List {
 
-    Node head;
+    private Node head;
 
     public CircularSinglyLinkedList(int value) {
         head = new Node(value);
@@ -14,6 +14,7 @@ public class CircularSinglyLinkedList {
     public CircularSinglyLinkedList() {
     }
 
+    @Override
     public void addFirst(int value) {
         Node node = new Node(value);
         if (head == null) {
@@ -50,6 +51,96 @@ public class CircularSinglyLinkedList {
         // Add the new node at the last:
         temp.next = node;
         node.next = head;
+    }
+
+    @Override
+    public void addAtIndex(int index, int value) {
+        if (index < 0) {
+            return;
+        }
+        if (head == null && index > 0) {
+            System.err.println("Not enough size to add at the index " + index);
+            return;
+        }
+        if (index == 0) {
+            addFirst(value);
+            return;
+        }
+        Node temp = head;
+        int pointer = 1;
+        while (temp.next != head && pointer != index) {
+            temp = temp.next;
+            pointer++;
+        }
+        Node node = new Node(value);
+        // if the index is the last index
+        if (temp.next == head) {
+            addLast(value);
+        } else {
+            Node nextNode = temp.next;
+            temp.next = node;
+            node.next = nextNode;
+        }
+    }
+
+    @Override
+    public boolean search(int key) {
+        if (head == null) {
+            return false;
+        }
+        if (head.data == key) {
+            return true;
+        }
+        Node temp = head.next;
+        while (temp != head) {
+            if (temp.data == key) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+
+    @Override
+    public int get(int index) {
+        if (index < 0 || head == null) {
+            return -1;
+        }
+        Node node = head;
+        int pointer = 0;
+        while (node.next != head && pointer != index) {
+            node = node.next;
+            pointer++;
+        }
+        if (node.next == head) {
+            System.err.println("Returning last element");
+        }
+        return node.data;
+    }
+
+    @Override
+    public int indexOf(int value) {
+        if (head == null) {
+            return -1;
+        }
+        Node node = head;
+        int index = 0;
+        while (node.next != head) {
+            if (node.data == value) {
+                return index;
+            }
+            node = node.next;
+            index++;
+        }
+        if (node.data == value) {
+            return index;
+        } else {
+            System.err.println(
+                    "CircularSinglyLinkedList doesn't have the value: " +
+                    value);
+            return -1;
+        }
+
     }
 
 
@@ -90,35 +181,61 @@ public class CircularSinglyLinkedList {
         }
     }
 
-    public boolean search(int key) {
-        if (head == null) {
+    @Override
+    public boolean deleteAtIndex(int index) {
+        if (head == null || index < 0) {
             return false;
         }
-        if (head.data == key) {
+        Node node = head;
+        Node prev = node;
+        int pointer = 0;
+        while (node.next != head && pointer != index) {
+            prev = node;
+            node = prev.next;
+            pointer++;
+        }
+        // Check if we have reached end before the index, meaning index is bigger than the size
+        if (pointer < index) {
+            System.err.println("List Index is out of bounds");
+            return false;
+        }
+        // Check if we are deleting the last node
+        if (node.next == head) {
+            // This is the current design: delete the last node if index is
+            // greater than the size of the CircularSinglyLinkedList
+            System.err.println(
+                    "Deleting the last node as index is Out of bounds of " +
+                    "CircularSinglyLinkedList");
+            prev.next = head;
+            return false;
+        } else {
+            // This is we are deleting first node, i.e. head node
+            if (prev == node) {
+                while (node.next != head) {
+                    node = node.next;
+                }
+                node.next = prev.next;
+                head = head.next;
+            } else {
+                prev.next = node.next;
+            }
             return true;
         }
-        Node temp = head.next;
-        while (temp != head) {
-            if (temp.data == key) {
-                return true;
-            }
-            temp = temp.next;
-        }
-        return false;
     }
 
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
         Node node = head;
-        if (head == null) {
+        StringBuilder sb = new StringBuilder();
+        if (node == null) {
             return "";
+        } else {
+            sb.append(node.data);
         }
-        sb.append(node.data).append(" ");
         while (node.next != head) {
-            sb.append(node.next.data).append(" ");
             node = node.next;
+            sb.append("->").append(node.data);
         }
         return sb.toString();
     }
@@ -130,6 +247,18 @@ public class CircularSinglyLinkedList {
         public Node(int value) {
             data = value;
             next = null;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(this.data);
+            Node node = this.next;
+            while (node != null && node != this) {
+                sb.append(">").append(node.data);
+                node = node.next;
+            }
+            return sb.toString();
         }
     }
 }
