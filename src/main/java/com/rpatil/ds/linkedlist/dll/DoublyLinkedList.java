@@ -1,6 +1,8 @@
 package com.rpatil.ds.linkedlist.dll;
 
-public class DoublyLinkedList {
+import com.rpatil.ds.linkedlist.List;
+
+public class DoublyLinkedList implements List {
     Node head;
     public DoublyLinkedList(int value) {
         head = new Node(value);
@@ -35,6 +37,31 @@ public class DoublyLinkedList {
         node.prev = temp;
     }
 
+    @Override
+    public void addAtIndex(int index, int value) {
+
+    }
+
+    public boolean search(int key) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == key) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+
+    @Override
+    public int get(int index) {
+        return 0;
+    }
+
+    @Override
+    public int indexOf(int value) {
+        return 0;
+    }
 
     public void delete(int value) {
         Node temp = head;
@@ -65,16 +92,11 @@ public class DoublyLinkedList {
         }
     }
 
-    public boolean search(int key) {
-        Node temp = head;
-        while (temp != null) {
-            if (temp.data == key) {
-                return true;
-            }
-            temp = temp.next;
-        }
+    @Override
+    public boolean deleteAtIndex(int index) {
         return false;
     }
+
 
 
     @Override
