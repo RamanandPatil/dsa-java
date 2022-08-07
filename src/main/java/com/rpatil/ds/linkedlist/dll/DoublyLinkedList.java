@@ -4,6 +4,7 @@ import com.rpatil.ds.linkedlist.List;
 
 public class DoublyLinkedList implements List {
     Node head;
+
     public DoublyLinkedList(int value) {
         head = new Node(value);
     }
@@ -39,7 +40,42 @@ public class DoublyLinkedList implements List {
 
     @Override
     public void addAtIndex(int index, int value) {
+        if (index < 0) {
+            return;
+        }
+        if (index == 0 || head == null) {
+            if (index > 0) {
+                System.err.println(
+                        "List is empty adding first item at index 0");
+            }
+            addFirst(value);
+            return;
+        }
+        Node temp = head;
+        int pointer = 0;
+        while (temp.next != null && pointer != index) {
+            temp = temp.next;
+            pointer++;
+        }
+        // Last item check
+        if (temp.next == null && pointer != index) {
+            // Still index is bigger than the size of the list, adding item
+            // to last
+            if (pointer < index) {
+                System.err.println(
+                        "Index is larger than the size of a List, adding " +
+                        "element at last index = " +
+                        pointer);
+            }
+            addLast(value);
+            return;
+        }
 
+        Node node = new Node(value);
+        node.next = temp;
+        node.prev = temp.prev;
+        temp.prev.next = node;
+        temp.prev = node;
     }
 
     public boolean search(int key) {
@@ -55,12 +91,36 @@ public class DoublyLinkedList implements List {
 
     @Override
     public int get(int index) {
-        return 0;
+        if (index < 0 || head == null) {
+            return -1;
+        }
+        Node node = head;
+        int pointer = 0;
+        while (node.next != null && pointer != index) {
+            node = node.next;
+            pointer++;
+        }
+        if (pointer != index) {
+            System.err.println("Reached end of list, returning last item");
+        }
+        return node.data;
     }
 
     @Override
     public int indexOf(int value) {
-        return 0;
+        if (head == null)
+            return -1;
+        Node node = head;
+        int index = 0;
+        while (node.data != value && node.next != null) {
+            node = node.next;
+            index++;
+        }
+        if (node.next == null && node.data != value) {
+            System.err.println("Last node reached, value not found");
+            return -1;
+        }
+        return index;
     }
 
     public void delete(int value) {
@@ -98,14 +158,16 @@ public class DoublyLinkedList implements List {
     }
 
 
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Node node = head;
         while (node != null) {
-            sb.append(node.data).append(" ");
+            sb.append(node.data);
             node = node.next;
+            if (node != null) {
+                sb.append("->");
+            }
         }
         return sb.toString();
     }
@@ -120,6 +182,15 @@ public class DoublyLinkedList implements List {
             data = value;
             prev = null;
             next = null;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                   "data=" + data +
+                   ", prev=" + (prev == null ? "null" : prev.data) +
+                   ", next=" + (next == null ? "null" : next.data) +
+                   '}';
         }
     }
 }
