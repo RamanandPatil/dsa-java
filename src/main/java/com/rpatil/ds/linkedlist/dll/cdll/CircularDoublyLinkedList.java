@@ -134,17 +134,89 @@ public class CircularDoublyLinkedList implements List {
 
     @Override
     public int indexOf(int value) {
-        return 0;
+        if (head == null) {
+            return -1;
+        }
+        Node node = head;
+        int index = 0;
+        while (node.data != value && node.next != head) {
+            node = node.next;
+            index++;
+        }
+        if (node.data == value) {
+            return index;
+        }
+        return -1;
+
     }
 
     @Override
     public void delete(int value) {
-
+        if (head == null) {
+            System.err.println("CircularDoublyLinkedList is empty");
+            return;
+        }
+        Node temp = head;
+        while (temp.data != value && temp.next != head) {
+            temp = temp.next;
+        }
+        // We found the value to be deleted
+        if (temp.data == value) {
+            // if it is a first node
+            if (temp == head) {
+                // If it is the only value
+                if (temp.next == head) {
+                    head = null;
+                } else {
+                    head.prev.next = head.next;
+                    head = head.next;
+                }
+            } else if (temp.next == head) { // if it is a last node
+                temp.prev.next = head;
+            } else {
+                temp.prev.next = temp.next;
+                temp.next.prev = temp.prev;
+            }
+        } else {
+            System.err.println(
+                    "Given value not found in the CircularDoublyLinkedList");
+        }
     }
 
     @Override
     public boolean deleteAtIndex(int index) {
-        return false;
+        if (head == null || index < 0) {
+            return false;
+        }
+        if (index == 0) {
+            delete(head.data);
+            return true;
+        }
+        Node temp = head;
+        int pointer = 0;
+        while (pointer != index && temp.next != head) {
+            pointer++;
+            temp = temp.next;
+        }
+        // Check if we have reached end before the index, meaning index is
+        // bigger than the size
+        if (pointer < index) {
+            System.err.println("List Index is out of bounds");
+            return false;
+        }
+        // Check if we are deleting the last node
+        if (temp.next == head) {
+            // This is the current design: delete the last node if index is
+            // greater than the size of the CircularSinglyLinkedList
+            System.err.println(
+                    "Deleting the last node as index is Out of bounds of " +
+                    "CircularSinglyLinkedList");
+            temp.prev.next = head;
+            return false;
+        }
+        temp.prev.next = temp.next;
+        temp.next.prev = temp.prev;
+        return true;
     }
 
     @Override

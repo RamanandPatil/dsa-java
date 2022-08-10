@@ -131,10 +131,84 @@ public class CircularDoublyLinkedListTest {
 
     @Test
     public void testDelete() {
+        cdll1.addFirst(15);
+        cdll1.addFirst(10);
+        cdll1.addFirst(5);
+        cdll1.addFirst(0);
+
+        Assert.assertEquals(cdll1.indexOf(0), 0);
+        cdll1.delete(0);
+        Assert.assertEquals(cdll1.indexOf(0), -1);
+
+        Assert.assertEquals(cdll1.indexOf(10), 1);
+        cdll1.delete(10);
+        Assert.assertEquals(cdll1.indexOf(10), -1);
+
+        Assert.assertEquals(cdll1.indexOf(20), -1);
+        cdll1.delete(20);
+        Assert.assertEquals(cdll1.indexOf(20), -1);
+
+
+        cdll2.addFirst(10);
+        cdll2.addFirst(5);
+        cdll2.addFirst(0);
+
+        Assert.assertEquals(cdll2.indexOf(5), 1);
+        cdll2.delete(5);
+        Assert.assertEquals(cdll2.indexOf(5), -1);
+
+        Assert.assertEquals(cdll2.indexOf(15), 2);
+        cdll2.delete(15);
+        Assert.assertEquals(cdll2.indexOf(15), -1);
+
+        Assert.assertEquals(cdll2.indexOf(10), 1);
+        cdll2.delete(10);
+        Assert.assertEquals(cdll2.indexOf(10), -1);
+
+        Assert.assertEquals(cdll2.indexOf(20), -1);
+        cdll2.delete(20);
+        Assert.assertEquals(cdll2.indexOf(20), -1);
     }
 
     @Test
     public void testDeleteAtIndex() {
+        cdll1.addFirst(15);
+        cdll1.addFirst(10);
+        cdll1.addFirst(5);
+        cdll1.addFirst(0);
+
+        Assert.assertEquals(cdll1.indexOf(0), 0);
+        cdll1.deleteAtIndex(0);
+        Assert.assertEquals(cdll1.indexOf(0), -1);
+
+        Assert.assertEquals(cdll1.indexOf(15), 2);
+        cdll1.deleteAtIndex(2);
+        Assert.assertEquals(cdll1.indexOf(15), -1);
+
+        Assert.assertEquals(cdll1.indexOf(10), 1);
+        cdll1.deleteAtIndex(2);
+        Assert.assertEquals(cdll1.indexOf(10), 1);
+
+
+        cdll2.addFirst(10);
+        cdll2.addFirst(5);
+        cdll2.addFirst(0);
+
+        Assert.assertEquals(cdll2.indexOf(5), 1);
+        cdll2.deleteAtIndex(1);
+        Assert.assertEquals(cdll2.indexOf(5), -1);
+
+        Assert.assertEquals(cdll2.indexOf(15), 2);
+        cdll2.deleteAtIndex(2);
+        Assert.assertEquals(cdll2.indexOf(15), -1);
+
+        Assert.assertEquals(cdll2.indexOf(10), 1);
+        cdll2.deleteAtIndex(1);
+        Assert.assertEquals(cdll2.indexOf(10), -1);
+
+        Assert.assertEquals(cdll2.indexOf(0), 0);
+        cdll2.deleteAtIndex(-1);
+        Assert.assertEquals(cdll2.indexOf(0), 0);
     }
 
     @Test
