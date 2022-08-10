@@ -86,10 +86,47 @@ public class CircularDoublyLinkedListTest {
 
     @Test
     public void testGet() {
+        cdll1.addFirst(15);
+        cdll1.addFirst(10);
+        cdll1.addFirst(5);
+        cdll1.addFirst(0);
+        Assert.assertEquals(cdll1.get(0), 0);
+        Assert.assertEquals(cdll1.get(1), 5);
+        Assert.assertEquals(cdll1.get(2), 10);
+        Assert.assertEquals(cdll1.get(3), 15);
+        Assert.assertEquals(cdll1.get(4), 15);
+
+        cdll2.addFirst(10);
+        cdll2.addFirst(5);
+        cdll2.addFirst(0);
+        Assert.assertEquals(cdll1.get(1), 5);
+        Assert.assertEquals(cdll1.get(2), 10);
+        Assert.assertEquals(cdll1.get(3), 15);
+        Assert.assertEquals(cdll1.get(4), 15);
+        Assert.assertEquals(cdll1.get(5), 15);
     }
 
     @Test
     public void testIndexOf() {
+        cdll1.addFirst(15);
+        cdll1.addFirst(10);
+        cdll1.addFirst(5);
+        cdll1.addFirst(0);
+        Assert.assertEquals(cdll1.indexOf(0), 0);
+        Assert.assertEquals(cdll1.indexOf(5), 1);
+        Assert.assertEquals(cdll1.indexOf(10), 2);
+        Assert.assertEquals(cdll1.indexOf(15), 3);
+        Assert.assertEquals(cdll1.indexOf(20), -1);
+
+        cdll2.addFirst(10);
+        cdll2.addFirst(5);
+        cdll2.addFirst(0);
+        Assert.assertEquals(cdll2.indexOf(0), 0);
+        Assert.assertEquals(cdll2.indexOf(5), 1);
+        Assert.assertEquals(cdll2.indexOf(10), 2);
+        Assert.assertEquals(cdll2.indexOf(15), 3);
+        Assert.assertEquals(cdll2.indexOf(20), -1);
+        Assert.assertEquals(cdll2.indexOf(25), -1);
     }
 
     @Test

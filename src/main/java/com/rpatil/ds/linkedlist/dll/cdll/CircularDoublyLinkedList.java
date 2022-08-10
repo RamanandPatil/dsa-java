@@ -115,7 +115,21 @@ public class CircularDoublyLinkedList implements List {
 
     @Override
     public int get(int index) {
-        return 0;
+        if (index < 0 || head == null) {
+            return -1;
+        }
+        Node node = head;
+        int pointer = 0;
+        while (node.next != head && pointer != index) {
+            node = node.next;
+            pointer++;
+        }
+        if (node.next == head && pointer != index) {
+            System.err.println(
+                    "Index is larger than size of the list, returning last " +
+                    "element");
+        }
+        return node.data;
     }
 
     @Override

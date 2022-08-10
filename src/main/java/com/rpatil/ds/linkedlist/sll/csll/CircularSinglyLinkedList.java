@@ -112,8 +112,8 @@ public class CircularSinglyLinkedList implements List {
             node = node.next;
             pointer++;
         }
-        if (node.next == head) {
-            System.err.println("Returning last element");
+        if (node.next == head && pointer != index) {
+            System.err.println("Index is larger than size of the list, returning last element");
         }
         return node.data;
     }
