@@ -28,12 +28,12 @@ public class DoublyLinkedListTest {
         dll1.addFirst(10);
         dll1.addFirst(5);
         dll1.addFirst(0);
-        Assert.assertEquals(dll1.toString(), "0->5->10->15");
+        Assert.assertEquals(dll1.toString(), "0<->5<->10<->15");
 
         dll2.addFirst(10);
         dll2.addFirst(5);
         dll2.addFirst(0);
-        Assert.assertEquals(dll2.toString(), "0->5->10->15");
+        Assert.assertEquals(dll2.toString(), "0<->5<->10<->15");
     }
 
     @Test
@@ -42,12 +42,12 @@ public class DoublyLinkedListTest {
         dll1.addLast(10);
         dll1.addLast(5);
         dll1.addLast(0);
-        Assert.assertEquals(dll1.toString(), "15->10->5->0");
+        Assert.assertEquals(dll1.toString(), "15<->10<->5<->0");
 
         dll2.addLast(10);
         dll2.addLast(5);
         dll2.addLast(0);
-        Assert.assertEquals(dll2.toString(), "15->10->5->0");
+        Assert.assertEquals(dll2.toString(), "15<->10<->5<->0");
     }
 
     @Test
@@ -56,12 +56,12 @@ public class DoublyLinkedListTest {
         dll1.addAtIndex(1, 5);
         dll1.addAtIndex(1, 10);
         dll1.addAtIndex(3, 0);
-        Assert.assertEquals(dll1.toString(), "15->10->5->0");
+        Assert.assertEquals(dll1.toString(), "15<->10<->5<->0");
 
         dll2.addAtIndex(1, 5);
         dll2.addAtIndex(1, 10);
         dll2.addAtIndex(3, 0);
-        Assert.assertEquals(dll2.toString(), "15->10->5->0");
+        Assert.assertEquals(dll2.toString(), "15<->10<->5<->0");
     }
 
     @Test
@@ -226,7 +226,7 @@ public class DoublyLinkedListTest {
         dll2.addLast(30);
 
 
-        Assert.assertEquals(dll1.toString(), "0->5->10->15->20");
-        Assert.assertEquals(dll2.toString(), "0->10->20->15->30");
+        Assert.assertEquals(dll1.toString(), "0<->5<->10<->15<->20");
+        Assert.assertEquals(dll2.toString(), "0<->10<->20<->15<->30");
     }
 }

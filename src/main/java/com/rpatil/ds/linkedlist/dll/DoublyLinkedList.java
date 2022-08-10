@@ -108,8 +108,9 @@ public class DoublyLinkedList implements List {
 
     @Override
     public int indexOf(int value) {
-        if (head == null)
+        if (head == null) {
             return -1;
+        }
         Node node = head;
         int index = 0;
         while (node.data != value && node.next != null) {
@@ -154,7 +155,34 @@ public class DoublyLinkedList implements List {
 
     @Override
     public boolean deleteAtIndex(int index) {
-        return false;
+        if (index < 0 || head == null) {
+            return false;
+        }
+        // If deleting head
+        if (index == 0) {
+           head = head.next;
+           head.prev = null;
+           return true;
+        }
+        Node temp = head;
+        int pointer = 0;
+        while (temp.next != null && pointer != index) {
+            temp = temp.next;
+            pointer++;
+        }
+        // Check if we have reached end before the index, meaning index is bigger than the size
+        if (pointer < index) {
+            System.err.println("List Index is out of bounds");
+            return false;
+        }
+        // See if we are deleting last node
+        if (temp.next == null) {
+            temp.prev.next = null;
+        } else {
+            temp.prev.next = temp.next;
+            temp.next.prev = temp.prev;
+        }
+        return true;
     }
 
 
@@ -166,7 +194,7 @@ public class DoublyLinkedList implements List {
             sb.append(node.data);
             node = node.next;
             if (node != null) {
-                sb.append("->");
+                sb.append("<->");
             }
         }
         return sb.toString();
