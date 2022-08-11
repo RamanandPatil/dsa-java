@@ -2,23 +2,49 @@ package com.rpatil.ds.array.da;
 
 import com.rpatil.ds.array.Array;
 
-public class DynamicArray implements Array<Integer> {
+public class DynamicArray<E> implements Array<E> {
     private int size = 0;
+
     private static final int DEFAULT_RESIZE_FACTOR = 2;
     private static final int INITIAL_DEFAULT_SIZE = 16;
+    private static final int MAX_SIZE = Integer.MAX_VALUE;
+    private int capacity = INITIAL_DEFAULT_SIZE;
+
+    private final Object[] array;
+
+    public DynamicArray() {
+        array = new Object[INITIAL_DEFAULT_SIZE];
+    }
+
+    public DynamicArray(int initialSize) {
+        this.capacity = initialSize;
+        array = new Object[initialSize];
+    }
 
     @Override
-    public boolean add(Integer element) {
+    public boolean add(E element) {
+        ensureCapacity();
         return false;
     }
 
+    private void ensureCapacity() {
+        if (capacity <= size) {
+            return;
+        }
+        if (capacity <= MAX_SIZE / 2) {
+            capacity *= 2;
+        } else {
+            capacity += MAX_SIZE / INITIAL_DEFAULT_SIZE;
+        }
+    }
+
     @Override
-    public void add(int index, Integer element) {
+    public void add(int index, E element) {
 
     }
 
     @Override
-    public Integer set(int index, Integer element) {
+    public E set(int index, E element) {
         return null;
     }
 
@@ -29,7 +55,7 @@ public class DynamicArray implements Array<Integer> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
@@ -38,7 +64,7 @@ public class DynamicArray implements Array<Integer> {
     }
 
     @Override
-    public Integer get(int index) {
+    public E get(int index) {
         return null;
     }
 
@@ -53,7 +79,7 @@ public class DynamicArray implements Array<Integer> {
     }
 
     @Override
-    public Integer remove(int index) {
+    public E remove(int index) {
         return null;
     }
 
